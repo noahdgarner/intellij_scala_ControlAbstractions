@@ -128,13 +128,27 @@ println{"Hello, World!"}
 
 //but this won't work
 val g = "Hello, worrld!"
-//does not work g.substring{7,9}
+//does not work
+//g.substring{7,9}
 //yes works.
 g.substring(7,9)
+//but, if we use currying, this now works!!
+g.substring(7) {9}
 
 
-
-
+//BY NAME PARAMETERS (what if we want to implement an if or while, where no value to pass between curly braces?)
+//The myAssert function will take a function value as input and consult a flag to decide what to do.
+//If the flag is set, myAssert will invoke the passed function and verify that it returns true.
+//if flag is off, it will quietly do nothign at all
+//HERE IT IS without by-name parameters
+var assertionsEnabled = true
+def myAssert(predicate: () => Boolean) =
+  if (assertionsEnabled && !predicate())
+    throw new AssertionError
+//this definition is fine, but awkward to use
+myAssert(() => 5 > 3)
+//we really want to leave out empty param list , right?
+//this is what by-name params are for.
 
 
 
