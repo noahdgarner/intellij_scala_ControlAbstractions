@@ -1,3 +1,4 @@
+
 //REDUCING CODE DUPLICATION using higher order functions
 //Lets create an API that allows user to search for files matching some criterion
 //1st: add facility to search for files whose names end
@@ -40,7 +41,7 @@ object FileMatcher {
 
   def filesContaining2(query: String) = filesMatching(query, _.contains(_))
 
-  def filesRegex(query2: String) = filesMatching(query, _.matches(_)) //_ means takes 2 strings
+  def filesRegex(query: String) = filesMatching(query, _.matches(_)) //_ means takes 2 strings
 
 }
 //even more simplified version ,holy crap
@@ -92,7 +93,7 @@ object FileMatcher2 {
   //so use .exists, and rewrite containsOdd like so
   //UTILIZING SPECIAL PORUPOSE LOOPING CONSTRUCTS provided by the Scala library
   //rather than being built into language
-  def containsOdd2(num: List[Int]) = nums.exists(_ % 2 == 1)
+  def containsOdd2(num: List[Int]) = num.exists(_ % 2 == 1)
 
 
 
@@ -104,6 +105,35 @@ object FileMatcher2 {
 //returns a result
 def twice(op: Double => Double, x: Double) =
   op(op(x))
+
+println()
+
+println(twice(_ + 1, 5))
+
+//CAPTURE IN A CONTROL ABSTRACTION
+//USING A METHOD LIKE THIS
+/*def withPrintWriter(file: File, op: PrintWriter => Unit) {
+  val writer = new PrintWriter(file)
+  try {
+    op(writer)
+  } finally {
+    writer.close()
+  }
+}*/
+
+//here is a way to make client code look more like a built in control structure, by using
+//curly braces instead of parentheses to surround an argument list.
+println("Hello, World!")
+println{"Hello, World!"}
+
+//but this won't work
+val g = "Hello, worrld!"
+//does not work g.substring{7,9}
+//yes works.
+g.substring(7,9)
+
+
+
 
 
 
