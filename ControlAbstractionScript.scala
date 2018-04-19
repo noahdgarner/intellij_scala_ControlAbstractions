@@ -97,14 +97,13 @@ object FileMatcher2 {
 
 
 
-
-
-
-
 }
 
 
-
+//a control structure that performs an op 2x and
+//returns a result
+def twice(op: Double => Double, x: Double) =
+  op(op(x))
 
 
 
