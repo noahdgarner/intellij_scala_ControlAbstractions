@@ -148,9 +148,16 @@ def myAssert(predicate: () => Boolean) =
 //this definition is fine, but awkward to use
 myAssert(() => 5 > 3)
 //we really want to leave out empty param list , right?
-//this is what by-name params are for.
+//this is what by-name params are for. myAssert( 5 > 3) won't work
 
-
+//to make a by name param, give the parameter a type starting with => instead of () =>. For example,
+//you could change myAssert's predicate parameter into a by-name parameter by changing its type, "() => Boolean,"
+// into " => Boolean"
+def myAssert2(predicate: Boolean) =
+  if (assertionsEnabled && !predicate())
+    throw new AssertionError
+//and so it works
+myAssert2(5 > 3)
 
 
 
